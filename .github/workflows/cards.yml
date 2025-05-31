@@ -1,21 +1,18 @@
 name: GitHub-Profile-Summary-Cards
 
 on:
-  schedule: # execute every 24 hours
-    # - cron: '0 0 * * *'
-    - cron: '0 0 * * 0'
+  schedule: 
+    - cron: '0 18 * * 6' # UTC18:00(土) = JST03:00(日) に実行
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     name: generate
-
     steps:
       - uses: actions/checkout@v2
       - uses: vn7n24fzkq/github-profile-summary-cards@release
-        env: # default use ${{ secrets.GITHUB_TOKEN }}, you can change to your personal access token
+        env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         with:
           USERNAME: ${{ github.repository_owner }}
-          # UTC_OFFSET: 8
